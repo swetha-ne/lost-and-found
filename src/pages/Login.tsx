@@ -1,6 +1,8 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 import { saveToken } from "../utils/auth";
+import PinDropIcon from "@mui/icons-material/PinDrop";
+
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -27,29 +29,35 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+         
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-6 rounded shadow-md w-full max-w-md"
+        className="bg-white p-6 rounded shadow-lg w-full max-w-md"
       >
-        <h2 className="text-2xl mb-4 font-bold text-center">Login</h2>
+    
+        <h2 className="text-2xl  font-bold text-center">Welcome back</h2>
+        <h3 className="text-center mb-2">Sign in to your account to continue</h3>
+        <label> Email address</label>
         <input
           type="email"
           placeholder="Email"
           className="w-full p-2 border border-gray-300 rounded mb-4"
           onChange={(e) => setEmail(e.target.value)}
         />
+        <label>Password </label>
         <input
           type="password"
           placeholder="Password"
-          className="w-full p-2 border border-gray-300 rounded mb-4"
+          className="w-full p-2 border border-gray-300 rounded mb-8"
           onChange={(e) => setPassword(e.target.value)}
         />
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+          className="w-full bg-black text-white py-2 rounded hover:bg-gray-900"
         >
-          Login
+          Sign in
         </button>
       </form>
     </div>

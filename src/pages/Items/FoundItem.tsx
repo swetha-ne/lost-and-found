@@ -1,22 +1,39 @@
 import { useState } from "react";
 
-const ReportItem = () => {
+const FoundItemForm = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [location, setLocation] = useState("");
   const [date, setDate] = useState("");
-  const [category, setCategory] = useState("Lost");
+  const [image, setImage] = useState<File | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const item = { title, description, location, date, category };
-    console.log("Item Submitted:", item);
-    
+
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("location", location);
+    formData.append("date", date);
+    formData.append("category", "Found");
+    if (image) {
+      formData.append("image", image);
+    }
+
+    // TODO: Send formData to backend via Axios
+    console.log("Found Item Submitted:", {
+      title,
+      description,
+      location,
+      date,
+      category: "Found",
+      image,
+    });
   };
 
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white shadow rounded mt-8">
-      <h2 className="text-2xl font-semibold mb-4 text-center">Report Lost Item</h2>
+      <h2 className="text-2xl font-semibold mb-4 text-center">Report Found Item</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
           type="text"
@@ -35,7 +52,7 @@ const ReportItem = () => {
         />
         <input
           type="text"
-          placeholder="Location"
+          placeholder="Found Location"
           className="w-full border p-2 rounded"
           value={location}
           onChange={(e) => setLocation(e.target.value)}
@@ -48,21 +65,22 @@ const ReportItem = () => {
           onChange={(e) => setDate(e.target.value)}
           required
         />
-        <select
+        <input
+          type="file"
+          accept="image/*"
           className="w-full border p-2 rounded"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-        >
-          <option value="Lost">Lost</option>
-          <option value="Found">Found</option>
-        </select>
+          onChange={(e) => setImage(e.target.files?.[0] || null)}
+        />
 
-        <button type="submit" className="w-full bg-black text-white py-2 rounded hover:bg-gray-700">
-          Submit
+        <button
+          type="submit"
+          className="w-full bg-black text-white py-2 rounded hover:bg-gray-700"
+        >
+          Submit Found Item
         </button>
       </form>
     </div>
   );
 };
 
-export default ReportItem;
+export default FoundItemForm;
