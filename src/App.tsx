@@ -7,6 +7,7 @@ import Dashboard from "./pages/Dashboard";
 import PrivateRoute from "./routes/PrivateRoute";
 import ReportItem from "./pages/Items/ReportItem";
 import LostItemsList from "./pages/Items/LostItemsList";
+import FoundItemForm from "./pages/Items/FoundItem";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/report-item" element={<PrivateRoute><ReportItem /></PrivateRoute>} />
 <Route path="/items" element={<LostItemsList />} />
+<Route path="/report-found" element={<PrivateRoute><FoundItemForm /></PrivateRoute>} />
         <Route
           path="/dashboard"
           element={
